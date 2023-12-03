@@ -1,6 +1,6 @@
 # Read puzzle file into a list of strings
 def read_puzzle_input():
-    with open("puzzle", "r") as file:
+    with open("input.txt", "r") as file:
         return file.readlines()
 
 
