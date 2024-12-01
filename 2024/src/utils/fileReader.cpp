@@ -39,4 +39,21 @@ namespace utils {
         }
         return numbers;
     }
+
+    TwoColumnData FileReader::readTwoColumnInts(const std::string& filename) {
+        TwoColumnData data;
+        std::vector<std::string> lines = readLines(filename);
+
+        for (const auto& line : lines) {
+            std::istringstream iss(line);
+            int left, right;
+
+            if (iss >> left >> right) {
+                data.left_column.push_back(left);
+                data.right_column.push_back(right);
+            }
+        }
+
+        return data;
+    }
 }
