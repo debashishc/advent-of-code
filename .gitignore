@@ -186,3 +186,35 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+### Add Cpp specific gitignore
+
+# Build directory
+build/
+out/
+
+# IDE specific files
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+.idea/
+*.swp
+*.swo
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.out
+*.app
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+*.cmake
+Makefile
+
+# OS specific files
+.DS_Store
+Thumbs.db
