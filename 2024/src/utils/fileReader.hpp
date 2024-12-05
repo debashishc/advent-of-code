@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <vector>
-// #include <utility>
 
 namespace utils {
 
@@ -9,6 +8,7 @@ namespace utils {
         std::vector<int> left_column;
         std::vector<int> right_column;
     };
+    
     class FileReader {
     public:
         static std::string readFile(const std::string& filename);
