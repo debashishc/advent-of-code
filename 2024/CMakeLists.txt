@@ -1,4 +1,4 @@
-macmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.10)
 project(AOC2024)
 
 # Set C++ standard
