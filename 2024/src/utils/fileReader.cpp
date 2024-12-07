@@ -56,4 +56,24 @@ namespace utils {
 
         return data;
     }
+
+
+    VariableColumnData FileReader::readVariableColumnInts(const std::string& filename) {
+        VariableColumnData data;
+        std::vector<std::string> lines = readLines(filename);
+
+        for (const auto& line : lines) {
+            std::istringstream iss(line);
+            std::vector<int> row;
+            int number;
+
+            while (iss >> number) {
+                row.push_back(number);
+            }
+
+            data.columns.push_back(row);
+        }        
+
+        return data;
+    }
 }
