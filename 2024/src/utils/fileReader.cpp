@@ -76,4 +76,13 @@ namespace utils {
 
         return data;
     }
+
+    VariableRowData FileReader::readVariableRowInts(const std::string& filename) {
+        VariableRowData data;
+        std::vector<std::string> lines = readLines(filename);
+
+        // TODO: need to finish variable row ints
+        
+        return data;
+    }
 }

@@ -4,13 +4,17 @@
 
 namespace utils {
 
-    struct TwoColumnData{
+    struct TwoColumnData {
         std::vector<int> left_column;
         std::vector<int> right_column;
     };
 
-    struct VariableColumnData{
+    struct VariableColumnData {
         std::vector<std::vector<int>> columns;
+    };
+
+    struct VariableRowData {
+        std::vector<std::vector<int>> rows;
     };
     
     class FileReader {
@@ -20,5 +24,6 @@ namespace utils {
         static std::vector<int> readLinesAsInts(const std::string& filename);
         static TwoColumnData readTwoColumnInts(const std::string& filename);
         static VariableColumnData readVariableColumnInts(const std::string& filename);
+        static VariableRowData readVariableRowInts(const std::string& filename);
     };
 }
