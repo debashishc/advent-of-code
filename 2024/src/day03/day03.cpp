@@ -1,10 +1,28 @@
 #include "day01.hpp"
 #include "fileReader.hpp"
 #include <iostream>
+#include <regex>
+#include <sstream>
+#include <string>
 
 int64_t Day03::solvePart1(const std::vector<std::string>& input) {
     // TODO: Implement solution for part 1
-    return 0;
+    const std::regex mulRegex(R"(mul\((\d{1,3}),(\d{1,3})\))");
+    int64_t sum = 0;
+
+    for (const auto& line: input) {
+        std::smatch match;
+        std::string remaining = line;
+
+        while (std::regex_search(remaining, match, mulRegex)) {
+            int x = std::stoi(match[1].str());
+            int y = std::stoi(match[2].str());
+            sum += x * y;
+            remaining = match.suffix().str();
+        }
+    }
+
+    return sum;
 }
 
 int64_t Day03::solvePart2(const std::vector<std::string>& input) {
