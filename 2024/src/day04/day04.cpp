@@ -8,8 +8,8 @@ int64_t Day04::solvePart1(const std::vector<std::string>& input) {
     int64_t count = 0;
     
     const int wordLength = word.length();
-    const int rows = input.size();
-    const int cols = input[0].size();
+    const size_t rows = input.size();
+    const size_t cols = input[0].size();
     
     // possible directions to search for the word
     const std::vector<std::pair<int, int>> directions = {
@@ -17,7 +17,28 @@ int64_t Day04::solvePart1(const std::vector<std::string>& input) {
         {1, 1}, {1, -1}, {-1, 1}, {-1, -1}
     };
 
-    
+    auto isValid = [&](int r, int c, int dr, int dc) {
+        for (int i = 0; i < wordLength; ++i) {
+            int nr = r + dr * i;
+            int nc = c + dc * i;
+            if (nr < 0 || nc < 0 || 
+                nr >= rows || nc >= cols ||
+                input[nr][nc] != word[i]) {
+                    return false;
+                }
+        }
+        return true;
+    };
+
+    for (size_t r = 0; r < rows; ++r) {
+        for (size_t c = 0; c < cols; ++c) {
+            for (const auto& [dr, dc] : directions) {
+                if (isValid(r, c, dr, dc)) {
+                    ++count;
+                }
+            }
+        }
+    }
     
     return count;
 }
