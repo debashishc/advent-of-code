@@ -44,8 +44,27 @@ int64_t Day04::solvePart1(const std::vector<std::string>& input) {
 }
 
 int64_t Day04::solvePart2(const std::vector<std::string>& input) {
-    // TODO: Implement solution for part 2
-    return 0;
+    int64_t count = 0;
+    int rows = input.size();
+    int cols = input[0].size();
+
+    auto isMas = [](char a, char b, char c) -> bool {
+        return (a == 'M' && b == 'A' && c == 'S') ||
+        (a == 'S' && b == 'A' && c == 'M');
+    };
+
+    for (int r = 1; r < rows - 1; ++r) {
+        for (int c = 1; c < cols - 1; ++c) {
+            if (input[r][c] == 'A') {
+                if (isMas(input[r - 1][c - 1], input[r][c], input[r + 1][c + 1]) &&
+                isMas(input[r - 1][c + 1], input[r][c], input[r + 1][c - 1])) {
+                    count++;
+                }
+            }
+        }
+    }
+
+    return count;
 }
 
 int main() {
