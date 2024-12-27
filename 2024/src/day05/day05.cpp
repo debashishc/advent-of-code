@@ -6,6 +6,9 @@
 // #include <iostream>
 #include <sstream>
 
+// parse rules and updates
+// first section is page ordering rules, one per line
+// second section specifies the page number of each update
 void parseInput(const std::vector<std::string>& input,
                 std::unordered_map<int, std::unordered_set<int>>& rules,
                 std::vector<std::vector<int>>& updates) {
@@ -17,14 +20,13 @@ void parseInput(const std::vector<std::string>& input,
             isRules = false;
             continue;
         }
-
-        if (isRules) {
+        if (isRules) { // rules separated like before | after
             std::istringstream iss(line);
             int before, after;
             char delimiter;
             iss >> before >> delimiter >> after;
             rules[before].insert(after);
-        } else {
+        } else { // update pages are comma separated
             std::vector<int> update;
             std::istringstream iss(line);
             int page;
@@ -35,7 +37,22 @@ void parseInput(const std::vector<std::string>& input,
             updates.push_back(update);
         }
     }
-};
+}
+
+// check if a single update is in the correct order
+bool isValidOrder(const std::vector<int>& update,
+                    const std::unordered_map<int, std::unordered_set<int>>& rules) {
+    
+    std::unordered_map<int, int> positions;
+    for (size_t i = 0; i < update.size(); ++i) {
+        positions[update[i]] = i;
+    }
+
+    for (const auto& rule: rules) {
+
+    }
+    return true;
+}
 
 
 int64_t Day05::solvePart1(const std::vector<std::string>& input) {
@@ -44,6 +61,10 @@ int64_t Day05::solvePart1(const std::vector<std::string>& input) {
 
     std::unordered_map<int, std::unordered_set<int>> rules;
     std::vector<std::vector<int>> updates;
+
+    parseInput(input, rules, updates);
+
+    
 
 
 
