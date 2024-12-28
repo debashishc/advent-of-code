@@ -48,8 +48,18 @@ bool isValidOrder(const std::vector<int>& update,
         positions[update[i]] = i;
     }
 
-    for (const auto& rule: rules) {
-
+    for (const auto& [before, afterSet]: rules) {
+        if (positions.count(before)) {
+            int beforePos = positions[before];
+            for (int after : afterSet) {
+                if (positions.count(after)) {
+                    int afterPos = positions[after];
+                    if (beforePos >= afterPos) {
+                        return false;
+                    }
+                }
+            }
+        }
     }
     return true;
 }
@@ -57,18 +67,19 @@ bool isValidOrder(const std::vector<int>& update,
 
 int64_t Day05::solvePart1(const std::vector<std::string>& input) {
     // TODO: Implement solution for part 1
-    int64_t countMiddlePages = 0;
+    int64_t sumMiddlePages = 0;
 
     std::unordered_map<int, std::unordered_set<int>> rules;
     std::vector<std::vector<int>> updates;
 
     parseInput(input, rules, updates);
 
-    
-
-
-
-    return countMiddlePages;
+    for (const auto& update: updates) {
+        if (isValidOrder(update, rules)) {
+            sumMiddlePages += update[update.size() / 2];
+        }
+    }
+    return sumMiddlePages;
 }
 
 int64_t Day05::solvePart2(const std::vector<std::string>& input) {
