@@ -84,7 +84,27 @@ int64_t Day05::solvePart1(const std::vector<std::string>& input) {
 
 int64_t Day05::solvePart2(const std::vector<std::string>& input) {
     // TODO: Implement solution for part 2
-    return 0;
+    int64_t sumMiddlePages = 0;
+    std::unordered_map<int, std::unordered_set<int>> rules;
+    std::vector<std::vector<int>> updates;
+
+    std::vector<std::vector<int>> invalidUpdates;
+
+    parseInput(input, rules, updates);
+
+    for (const auto& update : updates) {
+        // add invalid updates
+        if (!isValidOrder(update, rules)) {
+            invalidUpdates.push_back(update);
+        }
+    }
+
+    for (const auto& invalidUpdate : invalidUpdates) {
+        std::sort(invalidUpdate.begin(), invalidUpdate.end());
+        sumMiddlePages += invalidUpdate[invalidUpdate.size() / 2];
+    }
+
+    return sumMiddlePages;
 }
 
 int main() {
