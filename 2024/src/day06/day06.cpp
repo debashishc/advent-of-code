@@ -69,16 +69,7 @@ int64_t Day06::solvePart1(const std::vector<std::string>& input) {
     return visited.size();
 }
 
-// #include <unordered_set>
-// #include <unordered_map>
-// #include <queue>
 
-// struct PairHash {
-//     template <class T1, class T2>
-//     std::size_t operator()(const std::pair<T1, T2>& pair) const {
-//         return std::hash<T1>()(pair.first) ^ std::hash<T2>()(pair.second);
-//     }
-// };
 int64_t Day06::solvePart2(const std::vector<std::string>& input) {
     int rows = input.size();
     int cols = input[0].size();
