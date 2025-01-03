@@ -17,7 +17,7 @@ struct PairHash {
 
 int64_t Day06::solvePart1(const std::vector<std::string>& input) {
     // TODO: Implement solution for part 1
-        int rows = input.size();
+    int rows = input.size();
     int cols = input[0].size();
     std::pair<int, int> guardPos;
     std::vector<std::pair<int, int>> directions = { {-1, 0}, {0, 1}, {1, 0}, {0, -1} }; // Up, Right, Down, Left
@@ -99,9 +99,10 @@ int64_t Day06::solvePart2(const std::vector<std::string>& input) {
     auto causesLoop = [&](std::pair<int, int> newObstacle) -> bool {
         struct StateHash {
             std::size_t operator()(const std::pair<std::pair<int, int>, int>& state) const {
-                return std::hash<int>()(state.first.first) ^ 
-                       std::hash<int>()(state.first.second) ^ 
-                       std::hash<int>()(state.second);
+                auto hash1 = std::hash<int>()(state.first.first);
+                auto hash2 = std::hash<int>()(state.first.second);
+                auto hash3 = std::hash<int>()(state.second);
+                return hash1 ^ (hash2 << 1) ^ (hash3 << 2);
             }
         };
 
@@ -112,7 +113,7 @@ int64_t Day06::solvePart2(const std::vector<std::string>& input) {
         visited.insert(current);
         
         // Use a smaller maximum step count - just enough to find a reasonable loop
-        const size_t maxSteps = static_cast<size_t>(rows + cols) * 4;
+        const size_t maxSteps = rows * cols * 4;
         size_t steps = 0;
         
         while (steps < maxSteps) {  // Changed from while(true)
