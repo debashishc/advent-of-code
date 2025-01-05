@@ -5,7 +5,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <functional>
-// #include <iostream>
 #include <sstream>
 
 struct PairHash {
@@ -16,7 +15,6 @@ struct PairHash {
 };
 
 int64_t Day06::solvePart1(const std::vector<std::string>& input) {
-    // TODO: Implement solution for part 1
     int rows = input.size();
     int cols = input[0].size();
     std::pair<int, int> guardPos;
