@@ -8,6 +8,14 @@ int64_t evaluateExpression(const std::vector<int64_t>& numbers,
                            const std::vector<char>& operators) {
     int64_t result = numbers[0];
     
+    for (size_t i = 0; i < operators.size(); i++) {
+        if (operators[i] == '+') {
+            result += numbers[i + 1];
+        } else { // '*'
+            result *= numbers[i + 1];
+        }
+    }
+    
     return result;
 }
 
