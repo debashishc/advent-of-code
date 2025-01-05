@@ -21,7 +21,21 @@ int64_t evaluateExpression(const std::vector<int64_t>& numbers,
 
 // generate all possible operator combinations to check target
 bool canMakeTarget(int64_t target, const std::vector<int64_t>& numbers) {
-
+    size_t numOperators = numbers.size() - 1;
+    std::vector<char> operators(numOperators, '+');
+    
+    // all possible combinations of + and *
+    for (size_t mask = 0; mask < (1ULL << numOperators); mask++) {
+        // create operator combination based on bits in mask
+        for (size_t i = 0; i < numOperators; i++) {
+            operators[i] = (mask & (1ULL << i)) ? '*' : '+';
+        }
+        
+        int64_t result = evaluateExpression(numbers, operators);
+        if (result == target) {
+            return true;
+        }
+    }
     
     return false;
 }
