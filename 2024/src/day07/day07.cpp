@@ -6,17 +6,23 @@
 // evaluate an expression with given operators
 int64_t evaluateExpression(const std::vector<int64_t>& numbers, 
                            const std::vector<char>& operators) {
-    int64_t result = numbers[0];
+    std::vector<int64_t> vals = {numbers[0]}; 
     
     for (size_t i = 0; i < operators.size(); i++) {
-        if (operators[i] == '+') {
-            result += numbers[i + 1];
-        } else { // '*'
-            result *= numbers[i + 1];
+        int64_t current = numbers[i+1];
+        char op = operators[i];
+
+        if (op == '+') {
+            vals.back() += current;
+        } else if (op == '*') {
+            vals.back() += current;
+        } else if (op == '|') {
+            std::string num_string = std::to_string(current);
+            vals.back() = vals.back() * std::pow(10, num_string.length()) + current;
         }
     }
     
-    return result;
+    return vals.back();
 }
 
 // generate all possible operator combinations to check target
